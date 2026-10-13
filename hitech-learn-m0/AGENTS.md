@@ -1,0 +1,2 @@
+# HiTech Learn engineering contract
+Treat project Document 01 v1.0 as governing principles and the later MVP Implementation Blueprint v1.0 as additional decisions (not an override of conflicts). Do not add M1 features under the M0 approval. Respect server-only trust boundaries. Never claim real tenancy isolation from pure unit tests. Consult docs/decisions/open-questions.md before choosing providers, identity mapping or legal approaches. Changes to RLS/RBAC, minor-access features, AI quotas and deployments require a human review.

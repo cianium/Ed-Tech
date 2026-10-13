@@ -1,0 +1,247 @@
+HiTech Learn M0 local command verification | 2026-10-13
+
+## Node version
+$ node -v
+exit_code=0
+
+v22.16.0
+
+## npm version
+$ npm -v
+exit_code=0
+
+10.9.2
+
+## TypeScript global version
+$ tsc -v
+exit_code=0
+
+Version 5.8.3
+
+## Unit tests
+$ node --experimental-strip-types --test tests/unit/config.test.ts tests/unit/pilot-gates.test.ts tests/unit/scaffold.test.ts tests/unit/tenant-policy.test.ts
+exit_code=0
+
+TAP version 13
+# (node:1605) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: M0 config permits an empty local environment
+ok 1 - M0 config permits an empty local environment
+  ---
+  duration_ms: 1.641587
+  type: 'test'
+  ...
+# Subtest: M0 config requires an HTTPS origin in staging and production
+ok 2 - M0 config requires an HTTPS origin in staging and production
+  ---
+  duration_ms: 0.625535
+  type: 'test'
+  ...
+# Subtest: M0 config rejects ambiguous or dangerous origins
+ok 3 - M0 config rejects ambiguous or dangerous origins
+  ---
+  duration_ms: 0.391429
+  type: 'test'
+  ...
+# (node:1606) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: every sensitive feature is off in M0
+ok 4 - every sensitive feature is off in M0
+  ---
+  duration_ms: 1.893194
+  type: 'test'
+  ...
+# (node:1612) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: M0 landing is non-indexable and has no sign-up form or private API
+ok 5 - M0 landing is non-indexable and has no sign-up form or private API
+  ---
+  duration_ms: 1.593456
+  type: 'test'
+  ...
+# Subtest: M0 styling contains project design tokens and RTL readiness
+ok 6 - M0 styling contains project design tokens and RTL readiness
+  ---
+  duration_ms: 0.68324
+  type: 'test'
+  ...
+# (node:1638) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: M0 pure policy allows matching active membership
+ok 7 - M0 pure policy allows matching active membership
+  ---
+  duration_ms: 0.902224
+  type: 'test'
+  ...
+# Subtest: M0 pure policy denies cross-tenant references
+ok 8 - M0 pure policy denies cross-tenant references
+  ---
+  duration_ms: 0.20263
+  type: 'test'
+  ...
+# Subtest: M0 pure policy denies another account using the same membership
+ok 9 - M0 pure policy denies another account using the same membership
+  ---
+  duration_ms: 0.129061
+  type: 'test'
+  ...
+# Subtest: M0 pure policy denies absent auth and absent membership
+ok 10 - M0 pure policy denies absent auth and absent membership
+  ---
+  duration_ms: 0.130212
+  type: 'test'
+  ...
+# Subtest: M0 pure policy denies revoked, pending, empty resources
+ok 11 - M0 pure policy denies revoked, pending, empty resources
+  ---
+  duration_ms: 0.148109
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 383.882163
+
+## Core typecheck
+$ tsc --project tsconfig.core.json
+exit_code=0
+
+
+
+## Static boundary check
+$ node scripts/check-boundaries.mjs
+exit_code=0
+
+PASS: inspected 5 TS/TSX source files and required M0 artifacts (heuristic, not a security audit)
+
+## Secret pattern check
+$ node scripts/scan-secrets.mjs
+exit_code=0
+
+PASS: local pattern-based secret scan (does not replace a dedicated scanner)
+
+## ESLint
+$ npm run lint
+exit_code=127
+
+> hitech-learn@0.0.1-m0 lint
+> eslint .
+
+
+sh: 1: eslint: not found
+
+## Full typecheck
+$ npm run typecheck
+exit_code=2
+
+> hitech-learn@0.0.1-m0 typecheck
+> tsc --noEmit
+
+next.config.ts(1,33): error TS2307: Cannot find module 'next' or its corresponding type declarations.
+src/app/layout.tsx(1,41): error TS2307: Cannot find module 'next' or its corresponding type declarations.
+src/app/layout.tsx(2,32): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/app/layout.tsx(7,19): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.
+src/app/layout.tsx(19,5): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/layout.tsx(19,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/app/layout.tsx(20,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/layout.tsx(21,
+... [middle truncated] ...
+ts' exists.
+src/app/page.tsx(46,100): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(47,13): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(47,92): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(48,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(49,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(50,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(51,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(52,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(52,76): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(52,144): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(52,149): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(52,262): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(52,269): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(53,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(53,263): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(54,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(55,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(55,66): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(55,110): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(55,114): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(55,221): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(55,225): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(56,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(56,66): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(56,113): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(56,117): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(56,218): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(56,222): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(57,11): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(57,66): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(57,108): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(57,112): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(57,206): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(57,210): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(58,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(59,9): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(59,263): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(60,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(61,7): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(61,150): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(61,191): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(61,198): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(61,240): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(61,247): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+src/app/page.tsx(62,5): error TS7026: JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.
+tests/unit/config.test.ts(1,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.
+tests/unit/config.test.ts(2,18): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+tests/unit/pilot-gates.test.ts(1,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.
+tests/unit/pilot-gates.test.ts(2,18): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+tests/unit/scaffold.test.ts(1,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.
+tests/unit/scaffold.test.ts(2,30): error TS2307: Cannot find module 'node:fs' or its corresponding type declarations.
+tests/unit/scaffold.test.ts(3,18): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+tests/unit/tenant-policy.test.ts(1,20): error TS2307: Cannot find module 'node:assert/strict' or its corresponding type declarations.
+tests/unit/tenant-policy.test.ts(2,18): error TS2307: Cannot find module 'node:test' or its corresponding type declarations.
+
+## Production build
+$ npm run build
+exit_code=127
+
+> hitech-learn@0.0.1-m0 build
+> next build
+
+
+sh: 1: next: not found
+
+## Reproducible offline install
+$ npm ci --offline --ignore-scripts --no-audit --no-fund
+exit_code=1
+
+npm error code EUSAGE
+npm error
+npm error The `npm ci` command can only install with an existing package-lock.json or
+npm error npm-shrinkwrap.json with lockfileVersion >= 1. Run an install with npm@5 or
+npm error later to generate a package-lock.json file, then try again.
+npm error
+npm error Clean install a project
+npm error
+npm error Usage:
+npm error npm ci
+npm error
+npm error Options:
+npm error [--install-strategy <hoisted|nested|shallow|linked>] [--legacy-bundling]
+npm error [--global-style] [--omit <dev|optional|peer> [--omit <dev|optional|peer> ...]]
+npm error [--include <prod|dev|optional|peer> [--include <prod|dev|optional|peer> ...]]
+npm error [--strict-peer-deps] [--foreground-scripts] [--ignore-scripts] [--no-audit]
+npm error [--no-bin-links] [--no-fund] [--dry-run]
+npm error [-w|--workspace <workspace-name> [-w|--workspace <workspace-name> ...]]
+npm error [-ws|--workspaces] [--include-workspace-root] [--install-links]
+npm error
+npm error aliases: clean-install, ic, install-clean, isntall-clean
+npm error
+npm error Run "npm help ci" for more info
+npm error A complete log of this run can be found in: /home/oai/.npm/_logs/2026-10-13T19_58_08_344Z-debug-0.log

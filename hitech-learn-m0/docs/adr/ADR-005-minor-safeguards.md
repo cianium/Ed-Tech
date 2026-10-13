@@ -1,0 +1,4 @@
+# ADR-005 — Restricted accounts and guardian authorization
+**Status:** M0 fail-closed policy adopted; workflow implementation deferred to M1.
+
+Blueprint §3 requires underage invitations to create a restricted state until lawful age-policy authorization and verified guardian relationship/consent (where necessary). Model guardians separately from academy staff. Store consent version, scope, verifier, timestamp, withdrawal and audit. Revocation must remove dependent access. No real minor onboarding or child AI until legal, provider, privacy and security gates pass. No marketing trackers or public minor rankings. M0 implements static disabled flags only; that is NOT a functioning guardian verification system. The age bands <13, 13–17, 18+ are design buckets, not asserted Iran statutory thresholds.
